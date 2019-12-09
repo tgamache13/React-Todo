@@ -1,6 +1,7 @@
 import React from 'react';
 import ToDoForm from './components/TodoComponents/TodoForm';
 import ToDoList from './components/TodoComponents/TodoList';
+import './components/TodoComponents/Todo.css';
 
 
 class App extends React.Component {
@@ -10,9 +11,13 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: []
+      
+      todos: window.localStorage.getItem('saveState')
+      ? JSON.parse(window.localStorage.getItem('saveState')) :[]
+     
     };
   }
+ 
 
   addToDo = (todo) => {
     this.setState(
@@ -38,13 +43,19 @@ class App extends React.Component {
       return !todo.completed;
     })});
   }
- 
+  saveToStorage = () =>{
+    const saveState = JSON.stringify(this.state.todos);
+    localStorage.setItem('saveState', saveState);
+  }
+  
+  
   render() {
     return (
-      <div>
+      <div class='container'>
         <h2>To Do List</h2>
         <ToDoList toDoList={this.state.todos} toggleCompleted={this.toggleCompleted} />
         <ToDoForm  addToDo={this.addToDo} clearCompleted={this.clearCompleted} />
+        <button onClick={this.saveToStorage}>Save</button>
       </div>
     );
   }

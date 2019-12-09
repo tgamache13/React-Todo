@@ -1,0 +1,12 @@
+.form-control {
+    border: 1px solid orchid;
+}
+.alert {
+    background-color: orchid;
+}
+button {
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: black;
+    color: white;
+}

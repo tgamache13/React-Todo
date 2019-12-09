@@ -7,7 +7,9 @@ class ToDo extends React.Component {
 
     render() {
         return (
-            <p onClick={() => this.props.toggleCompleted(this.props.todo.id)} style={{textDecoration: this.props.todo.completed && 'line-through'}}>{this.props.todo.task}</p>
+            <ul class="list-group">
+            <li class="list-group-item" onClick={() => this.props.toggleCompleted(this.props.todo.id)} style={{textDecoration: this.props.todo.completed && 'line-through'}}>{this.props.todo.task}</li>
+            </ul>
         );
     }
 }
