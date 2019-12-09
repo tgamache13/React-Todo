@@ -5,16 +5,15 @@ import React from 'react';
 import ToDo from './Todo';
 
 class ToDoList extends React.Component {
-    constructor(){
-        super();
-
-    }
+    
 
     render() {
         return (
             <div class="container">
                 <div class='alert  col-sm-4'>
-                {this.props.toDoList.map(todo => {
+                {this.props.toDoList.filter(todo => {
+                    return todo.task.includes(this.props.filter);
+                }).map(todo => {
                     return <ToDo key={todo.id} todo={todo} toggleCompleted={this.props.toggleCompleted} />
                 })}
                 </div>

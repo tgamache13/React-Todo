@@ -2,6 +2,7 @@ import React from 'react';
 import ToDoForm from './components/TodoComponents/TodoForm';
 import ToDoList from './components/TodoComponents/TodoList';
 import './components/TodoComponents/Todo.css';
+import Search from './components/TodoComponents/Search';
 
 
 class App extends React.Component {
@@ -13,8 +14,8 @@ class App extends React.Component {
     this.state = {
       
       todos: window.localStorage.getItem('saveState')
-      ? JSON.parse(window.localStorage.getItem('saveState')) :[]
-     
+      ? JSON.parse(window.localStorage.getItem('saveState')) :[],
+      filter: ''
     };
   }
  
@@ -47,13 +48,18 @@ class App extends React.Component {
     const saveState = JSON.stringify(this.state.todos);
     localStorage.setItem('saveState', saveState);
   }
-  
+  searchFilter = (filter) => {
+    this.setState({
+      filter: filter
+    });
+  }
   
   render() {
     return (
       <div class='container'>
         <h2>To Do List</h2>
-        <ToDoList toDoList={this.state.todos} toggleCompleted={this.toggleCompleted} />
+        <Search searchFilter={this.searchFilter} />
+        <ToDoList toDoList={this.state.todos} toggleCompleted={this.toggleCompleted} filter={this.state.filter} />
         <ToDoForm  addToDo={this.addToDo} clearCompleted={this.clearCompleted} />
         <button onClick={this.saveToStorage}>Save</button>
       </div>
